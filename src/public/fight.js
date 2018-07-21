@@ -4,22 +4,25 @@ export default async function fight(fighter, improvedFighter, ...points){
         if(isEven(i)){
             fighter.hit(improvedFighter, points[i]);
             if(improvedFighter.health < 0){
-                document.getElementById("app").innerHTML += `${improvedFighter.name} is dead <br>`;
-                let promise = await improvedFighter.knockout;
-                document.getElementById("app").innerHTML = promise;
+                await showInfoAboutDead(improvedFighter);
                 break;
             }
         }
         else{
             improvedFighter.doubleHit(fighter, points[i]);
             if(fighter.health < 0){
-                document.getElementById("app").innerHTML += `${fighter.name} is dead<br>`;
-                let promise = await fighter.knockout;
-                document.getElementById("app").innerHTML+=(promise)
+                await showInfoAboutDead(fighter);
                 break;
             }
         }
     }
+}
+
+async function showInfoAboutDead(fighter){
+    document.getElementById("app").innerHTML += `${fighter.name} is dead<br>`;
+    let promise = await fighter.knockout;
+    document.getElementById("app").innerHTML += "time is over<br>";
+    document.getElementById("app").innerHTML += promise
 }
 
 var isEven = function(someNumber) {

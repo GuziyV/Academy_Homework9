@@ -1,6 +1,6 @@
 // Create class Fighter
 export default class Fighter{
-    constructor(name, power, health){
+    constructor(name, power, health = 450){
         this.name = name;
         this.power = power;
         this.health = health;
@@ -18,7 +18,6 @@ export default class Fighter{
 
     get knockout(){
         return new Promise((resolve, rejected) => {
-            document.getElementById("app").innerHTML += "time is over<br>";
             setTimeout(() =>{
                 resolve(`Fighter ${this.name} lost`);
             }, 500);
